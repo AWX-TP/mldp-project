@@ -5,7 +5,7 @@ import pandas as pd
 
 # Load trained model and feature columns
 model = joblib.load("churn_best_rf_model.pkl")
-model_features = joblib.load("churn_model.pkl")
+model_features = joblib.load("feature_columns.pkl")
 
 ## Streamlit app
 st.title("Customer Churn Prediction")
