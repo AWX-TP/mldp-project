@@ -30,9 +30,19 @@ if st.button("Predict Churn"):
     input_df = pd.get_dummies(input_df, drop_first=True)
     input_df = input_df.reindex(columns=model_features, fill_value=0)
 
+    # Input validation
+    if total_charges < monthly_charges:
+        st.warning("Total Charges should usually be greater than Monthly Charges.")
+        st.stop()
+
     # Predict
-    prediction = model.predict(input_df)[0]
-    probability = model.predict_proba(input_df)[0][1]
+    try:
+        with st.spinner("Predicting churn risk..."):
+            prediction = model.predict(input_df)[0]
+            probability = model.predict_proba(input_df)[0][1]
+    except Exception as e:
+        st.error(f"Error making prediction: {e}")
+        st.stop()
 
     # Display result
     if prediction == 1:
