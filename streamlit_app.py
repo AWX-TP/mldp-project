@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 
 # Load trained model and feature columns
-model = joblib.load("tuned_rf_model.pkl")
-model_features = joblib.load("model_features.pkl")
+model = joblib.load("churn_best_rf_model.pkl")
+model_features = joblib.load("churn_model.pkl")
 
 ## Streamlit app
 st.title("Customer Churn Prediction")
@@ -38,4 +38,4 @@ if st.button("Predict Churn"):
     if prediction == 1:
         st.error(f"High Risk of Churn (Probability: {probability:.2f})")
     else:
-        st.success(f"Likely to Stay (Probability: {1 - probability:.2f})")
+        st.success(f"Likely to Stay (Churn Probability: {probability:.2f})")
